@@ -1,6 +1,8 @@
 "use client"
+import { LogIn } from "lucide-react";
 import { Button } from "./ui/button"
 import { useAuth } from "@/context/auth";
+
 
 export default function ContinueWithGoogleButton() {
     const auth = useAuth();
@@ -11,6 +13,7 @@ export default function ContinueWithGoogleButton() {
         }}
         className="w-full"
         >
+            <LogIn />
             Continue with Google
         </Button>
     )
