@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export default function AuthButtons() {
     const auth = useAuth();
-    console.log("user loged in");
+    // console.log("user loged in");
 
     return (
         <div>
