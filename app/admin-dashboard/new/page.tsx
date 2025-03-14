@@ -13,7 +13,7 @@ export default function NewProperty() {
 
         <Card className="mt-5">
             <CardHeader>
-                <CardTitle>New Property</CardTitle>
+                <CardTitle >New Property</CardTitle>
             </CardHeader>
             <CardContent>
                 <NewPropertyForm />
