@@ -12,6 +12,7 @@ import { Button } from "./ui/button";
 
 
 
+
 type Props = {
     submitButtonlabel: React.ReactNode
     handleSubmit: (data: z.infer<typeof propertyDetailsSchema>) => void;
@@ -39,7 +40,7 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel }: Props)
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
                 <div className="grid grid-cols-2 gap-4">
-                    <fieldset className="flex flex-col gap-2">
+                    <fieldset className="flex flex-col gap-2" disabled={form.formState.isSubmitting}>
                         {/* status  */}
                         <FormField
                             control={form.control}
@@ -130,7 +131,7 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel }: Props)
                         />
                     </fieldset>
 
-                    <fieldset className="flex flex-col gap-2 w-full h-full">
+                    <fieldset className="flex flex-col gap-2 w-full h-full" disabled={form.formState.isSubmitting}>
                         
                         <FormField
                             control={form.control}
@@ -196,7 +197,7 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel }: Props)
                     </fieldset>
 
                 </div>
-                    <Button type="submit" className="max-w-md mx-auto mt-2 w-full flex gap-2">
+                    <Button type="submit" className="max-w-md mx-auto mt-2 w-full flex gap-2" disabled={form.formState.isSubmitting}>
                         {submitButtonlabel}
                     </Button>
             </form>
