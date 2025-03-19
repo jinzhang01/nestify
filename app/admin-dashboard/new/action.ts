@@ -4,7 +4,7 @@ import { auth, firestore } from "@/firebase/server";
 import { propertyDetailsSchema } from "@/validation/propertySchema";
 
 
-export const saveNewProperty = async (data: 
+export const createNewProperty = async (data: 
     {
         address1: string;
         address2?: string;

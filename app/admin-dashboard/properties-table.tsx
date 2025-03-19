@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { getProperties } from "@/data/properties";
+import { PencilIcon } from "lucide-react";
 import Link from "next/link";
 
 export default async function PropertiesTable(
@@ -14,7 +15,6 @@ export default async function PropertiesTable(
             },
         }
     );
-    console.log({ data, totalPages });
     return <>
         {!data && <h1 className="text-center text-zinc-400 py-20 font-bold text-3xl">You have no properties</h1>}
 
@@ -35,31 +35,37 @@ export default async function PropertiesTable(
                                 <TableCell> {address} </TableCell>
                                 <TableCell> {property.price} </TableCell>
                                 <TableCell> {property.status} </TableCell>
-                                <TableCell> view/edit </TableCell>
+                                <TableCell> view /{" "}
+                                    <Button asChild variant="outline" size="sm">
+                                        <Link href={`/admin-dashboard/edit/${property.id}`}>  <PencilIcon /> </Link>
+
+                                    </Button>
+
+                                </TableCell>
 
                             </TableRow>
                         )
                     })
                 }
             </TableBody>
-            <TableFooter>
-                <TableCell colSpan={4} className="text-center">
-                    {Array.from(
-                        { length: totalPages}).map((_, index) => (
-                            <Button key={index} asChild variant="outline" className="mx-1">
-                                <Link href={`/admin-dashboard?page=${index + 1}`}>
-                                    {index + 1}
-                                </Link>
-                            </Button>
 
-                        )
-                    )}
+                <TableFooter>
+                    <TableCell colSpan={4} className="text-center">
+                        {Array.from(
+                            { length: totalPages }).map((_, index) => (
+                                <Button key={index} asChild variant="outline" className="mx-1">
+                                    <Link href={`/admin-dashboard?page=${index + 1}`}>
+                                        {index + 1}
+                                    </Link>
+                                </Button>
 
-                </TableCell>
+                            )
+                            )}
 
-            </TableFooter>
+                    </TableCell>
 
-        </Table>
+                </TableFooter>
+        </Table >
 
     </>
 

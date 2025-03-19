@@ -16,13 +16,14 @@ import { Button } from "./ui/button";
 type Props = {
     submitButtonlabel: React.ReactNode
     handleSubmit: (data: z.infer<typeof propertyDetailsSchema>) => void;
+    defaultValues?: z.infer<typeof propertyDetailsSchema>
 }
 
 
-export default function PropertyForm({ handleSubmit, submitButtonlabel }: Props) {
-    const form = useForm<z.infer<typeof propertyDetailsSchema>>({
-        resolver: zodResolver(propertyDetailsSchema),
-        defaultValues: {
+
+export default function PropertyForm({ handleSubmit, submitButtonlabel, defaultValues }: Props) {
+    const combinedDefaultValues = {
+        ...{
             address1: "",
             address2: "",
             city: "",
@@ -30,10 +31,14 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel }: Props)
             price: 0,
             bedrooms: 0,
             bathrooms: 0,
-            status: "draft",
-            description: "",
-
-        }
+            status: "draft" as "draft" | "for-sale" | "sold" | "withdrawn",  
+            description: ""
+        },
+        ...defaultValues
+    }
+    const form = useForm<z.infer<typeof propertyDetailsSchema>>({
+        resolver: zodResolver(propertyDetailsSchema),
+        defaultValues: combinedDefaultValues
     });
 
     return (
@@ -132,7 +137,7 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel }: Props)
                     </fieldset>
 
                     <fieldset className="flex flex-col gap-2 w-full h-full" disabled={form.formState.isSubmitting}>
-                        
+
                         <FormField
                             control={form.control}
                             name="price"
@@ -185,8 +190,8 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel }: Props)
                                 <FormItem>
                                     <FormLabel>Description</FormLabel>
                                     <FormControl>
-                                        <Textarea {...field} rows={4} className="resize-none h-25.5"/>
- 
+                                        <Textarea {...field} rows={4} className="resize-none h-25.5" />
+
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -197,9 +202,9 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel }: Props)
                     </fieldset>
 
                 </div>
-                    <Button type="submit" className="max-w-md mx-auto mt-2 w-full flex gap-2" disabled={form.formState.isSubmitting}>
-                        {submitButtonlabel}
-                    </Button>
+                <Button type="submit" className="max-w-md mx-auto mt-2 w-full flex gap-2" disabled={form.formState.isSubmitting}>
+                    {submitButtonlabel}
+                </Button>
             </form>
         </Form>
     )

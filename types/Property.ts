@@ -10,4 +10,5 @@ export type Property = {
     bedrooms: number;
     bathrooms: number;
     status: PropertyStatus;
+    description: string;
 }

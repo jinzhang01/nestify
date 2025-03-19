@@ -6,11 +6,19 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Avatar } from "./ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 
 export default function AuthButtons() {
+    const router = useRouter();
     const auth = useAuth();
     // console.log("user loged in");
+    const handleLgout = 
+        async () => {
+            await auth.logout();
+            router.refresh();
+
+        }
 
     return (
         <div>
@@ -51,9 +59,7 @@ export default function AuthButtons() {
 
 
                         <DropdownMenuItem onClick={
-                            async () => {
-                                await auth.logout();
-                            }
+                            handleLgout
                         }>Log Out</DropdownMenuItem>
 
 

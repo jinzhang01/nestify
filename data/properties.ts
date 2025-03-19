@@ -53,3 +53,15 @@ export const getProperties = async (options?: GetPropertiesOptions) => {
     return {data: properties, totalPages};
 
 }
+
+
+export const getPropertyByID = async (propertyId: string) => {
+    const propertySnapshot = await firestore().collection("properties").doc(propertyId).get();
+
+    const propertyData = {
+        id: propertySnapshot.id,
+        ...propertySnapshot.data()
+    } as Property;
+    return propertyData;
+
+}
