@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { propertyDetailsSchema } from "@/validation/propertySchema"
+import { propertySchema } from "@/validation/propertySchema"
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
@@ -9,14 +9,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
+import MultiImageUploader, { ImageUpload } from "./multi-image-uploader";
 
 
 
 
 type Props = {
     submitButtonlabel: React.ReactNode
-    handleSubmit: (data: z.infer<typeof propertyDetailsSchema>) => void;
-    defaultValues?: z.infer<typeof propertyDetailsSchema>
+    handleSubmit: (data: z.infer<typeof propertySchema>) => void;
+    defaultValues?: z.infer<typeof propertySchema>
 }
 
 
@@ -31,13 +32,14 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel, defaultV
             price: 0,
             bedrooms: 0,
             bathrooms: 0,
-            status: "draft" as "draft" | "for-sale" | "sold" | "withdrawn",  
-            description: ""
+            status: "draft" as "draft" | "for-sale" | "sold" | "withdrawn",
+            description: "",
+            images: [],
         },
         ...defaultValues
     }
-    const form = useForm<z.infer<typeof propertyDetailsSchema>>({
-        resolver: zodResolver(propertyDetailsSchema),
+    const form = useForm<z.infer<typeof propertySchema>>({
+        resolver: zodResolver(propertySchema),
         defaultValues: combinedDefaultValues
     });
 
@@ -202,7 +204,26 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel, defaultV
                     </fieldset>
 
                 </div>
-                <Button type="submit" className="max-w-md mx-auto mt-2 w-full flex gap-2" disabled={form.formState.isSubmitting}>
+                <FormField
+                    control={form.control}
+                    name="images"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <MultiImageUploader onImagesChange={(images: ImageUpload[]) => {
+                                    form.setValue("images", images)
+                                }}
+                                    images={field.value}
+                                />
+
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+
+                <Button  type="submit" className="max-w-md mx-auto mt-2 w-full flex gap-2" disabled={form.formState.isSubmitting}>
                     {submitButtonlabel}
                 </Button>
             </form>

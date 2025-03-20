@@ -13,12 +13,6 @@ export default function AuthButtons() {
     const router = useRouter();
     const auth = useAuth();
     // console.log("user loged in");
-    const handleLgout = 
-        async () => {
-            await auth.logout();
-            router.refresh();
-
-        }
 
     return (
         <div>
@@ -59,8 +53,10 @@ export default function AuthButtons() {
 
 
                         <DropdownMenuItem onClick={
-                            handleLgout
-                        }>Log Out</DropdownMenuItem>
+                            async () => {
+                                await auth.logout();
+                                router.refresh();
+                            }}>Log Out</DropdownMenuItem>
 
 
                     </DropdownMenuContent>

@@ -15,4 +15,14 @@ export const propertyDetailsSchema = z.object({
     status: z.enum(["draft", "for-sale", "sold", "withdrawn"]),
     price: z.coerce.number().positive("Price must be greater than zero"),
 
-})
+});
+
+export const peopertyImagesSchema = z.object({
+    images: z.array(z.object({
+        id: z.string(),
+        url: z.string(),
+        file: z.instanceof(File).optional(),
+    }))
+});
+
+export const propertySchema = propertyDetailsSchema.merge(peopertyImagesSchema);
