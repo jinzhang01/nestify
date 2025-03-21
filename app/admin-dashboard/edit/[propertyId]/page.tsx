@@ -6,7 +6,6 @@ import EditPropertyForm from "./edit-property-form";
 export default async function EditProperty({ params }: { params: Promise<any> }) {
     const paramsValue = await params;
     const property = await getPropertyByID(paramsValue.propertyId);
-    console.log(property);
 
     return (
         <div>
@@ -33,6 +32,8 @@ export default async function EditProperty({ params }: { params: Promise<any> })
                     bedrooms={property.bedrooms}
                     bathrooms={property.bathrooms}
                     description={property.description}
+                    images={property.images || []}
+
                     />
                 </CardContent>
             </Card>

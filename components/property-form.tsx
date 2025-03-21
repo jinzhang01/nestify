@@ -43,6 +43,7 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel, defaultV
         defaultValues: combinedDefaultValues
     });
 
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
@@ -214,7 +215,16 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel, defaultV
                                     form.setValue("images", images)
                                 }}
                                     images={field.value}
+
+
+                                    urlFormatter={(image) => {
+                                        if (!image.file) {
+                                            return `https://firebasestorage.googleapis.com/v0/b/nestify-d913c.firebasestorage.app/o/${encodeURIComponent(image.url)}?alt=media`;
+                                        }
+                                        return image.url;
+                                    }}
                                 />
+
 
                             </FormControl>
                             <FormMessage />
@@ -223,7 +233,7 @@ export default function PropertyForm({ handleSubmit, submitButtonlabel, defaultV
                 />
 
 
-                <Button  type="submit" className="max-w-md mx-auto mt-2 w-full flex gap-2" disabled={form.formState.isSubmitting}>
+                <Button type="submit" className="max-w-md mx-auto mt-2 w-full flex gap-2" disabled={form.formState.isSubmitting}>
                     {submitButtonlabel}
                 </Button>
             </form>

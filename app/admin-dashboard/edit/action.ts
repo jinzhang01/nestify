@@ -4,6 +4,8 @@ import { auth, firestore } from "@/firebase/server";
 import { Property } from "@/types/Property"
 import { propertyDetailsSchema } from "@/validation/propertySchema";
 
+
+
 export const updateProperty = async (data: Property, authToken: string) => {
     const { id, ...propertyData } = data;
     const verfiedToken = await auth.verifyIdToken(authToken);
@@ -17,8 +19,10 @@ export const updateProperty = async (data: Property, authToken: string) => {
         return { error: true, message: validation.error.issues[0]?.message ?? "A validation error occured" }
     }
 
-    await firestore.collection("properties").doc(id).update({
+
+
+      await firestore.collection("properties").doc(id).update({
         ...propertyData,
         updated: new Date(),
-    });
+      });
 }
