@@ -5,7 +5,7 @@ import { useAuth } from "@/context/auth";
 import { useRouter } from "next/navigation";
 
 
-export default function ContinueWithGoogleButton() {
+export default function ContinueWithGoogleButton({ onSuccess }: { onSuccess?: () => void }) {
     const auth = useAuth();
     const router = useRouter();
 
@@ -13,7 +13,8 @@ export default function ContinueWithGoogleButton() {
     return (
         <Button onClick={async() => {
             await auth?.loginwithGoogle()
-            router.refresh()
+            // router.refresh()
+            onSuccess?.();
         }}
         className="w-full"
         >

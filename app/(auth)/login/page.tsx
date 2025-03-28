@@ -20,7 +20,9 @@ export default function Login() {
                     <CardTitle className="text-3xl font-bold">Login</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <ContinueWithGoogleButton />
+                    <ContinueWithGoogleButton onSuccess={()=>{
+                        router.refresh();
+                    }}/>
                 </CardContent>
     
             </Card>
