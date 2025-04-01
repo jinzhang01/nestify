@@ -9,6 +9,7 @@ import { useAuth } from "@/context/auth";
 import { GoogleAuthProvider, reauthenticateWithPopup, deleteUser } from "firebase/auth";
 import { useState } from "react"
 import { toast } from "sonner";
+import { deleteUserFavourotes } from "./actions";
 
 export default function DeleteAccountButton() {
     const auth = useAuth();
@@ -20,6 +21,8 @@ export default function DeleteAccountButton() {
             try {
                 const provider = new GoogleAuthProvider();
                 await reauthenticateWithPopup(auth.currentUser, provider);
+                // delete user's favourites 
+                await deleteUserFavourotes()
                 await deleteUser(auth.currentUser);
                 await removeToken();
 

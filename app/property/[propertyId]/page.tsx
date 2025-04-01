@@ -8,6 +8,9 @@ import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 import BackButton from "./back-button";
 
+// emable cashing to save on server
+export const dynamic = "force-static";
+
 export default async function Property({ params }: { params: Promise<any> }) {
     const paramsValue = await params;
     const property = await getPropertyByID(paramsValue.propertyId);
