@@ -1,10 +1,12 @@
 import PropertyStatusBadge from "@/components/property-status-badge";
 import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { getUserFavourites } from "@/data/favourites";
 import { getPropertiesById } from "@/data/properties";
 import { EyeIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
+import RemoveFavouriteButton from "./remove-favourite";
+import { redirect } from "next/navigation";
 
 export default async function MyFavourites({ searchParams }:
     { searchParams: Promise<any> }
@@ -16,6 +18,10 @@ export default async function MyFavourites({ searchParams }:
     const allFavourites = favourites ? Object.keys(favourites) : [];
     const totalPages = Math.ceil(allFavourites.length / pageSize);
     const paginatedFavourites = allFavourites.slice((page - 1) * pageSize, page * pageSize);
+
+    if (!paginatedFavourites.length && page > 1) {
+        redirect(`/account/my-favourites?page=${totalPages}`);
+    }
 
     const properties = await getPropertiesById(paginatedFavourites);
 
@@ -63,11 +69,9 @@ export default async function MyFavourites({ searchParams }:
                                     <>
                                         <Button asChild variant="outline">
                                             <Link href={`/property/${property.id}`}><EyeIcon />  </Link>
-                                            
+
                                         </Button>
-                                        <Button variant="outline">
-                                            <Trash2Icon /> 
-                                        </Button>
+                                        <RemoveFavouriteButton propertyId={property.id} />
                                     </>
                                 )}
                             </TableCell>
@@ -75,6 +79,21 @@ export default async function MyFavourites({ searchParams }:
                     );
                 })}
             </TableBody>
+            <TableFooter>
+                <TableRow>
+                    <TableCell colSpan={3} className="text-center">
+                        {Array.from({ length: totalPages }).map((_, index) => {
+                            return (
+                                <Button disabled={page === index + 1} key={index} asChild={page !== index + 1} variant="outline" className="mx-1">
+                                    <Link href={`/account/my-favourites?page=${index + 1}`}>
+                                        {index + 1}
+                                    </Link>
+                                </Button>
+                            )
+                        })}
+                    </TableCell>
+                </TableRow>
+            </TableFooter>
         </Table>}
 
     </div>

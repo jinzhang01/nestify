@@ -67,6 +67,10 @@ export const getPropertyByID = async (propertyId: string) => {
 }
 
 export const getPropertiesById = async (propertyIds: string[]) => {
+
+    if (!propertyIds.length) {
+        return [];
+    }
     const propertiesSnapshot = await firestore().collection("properties").where("__name__", "in", propertyIds).get();
 
     const propertiesData = propertiesSnapshot.docs.map((doc) => ({ 
