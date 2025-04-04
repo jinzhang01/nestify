@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="h-screen relative p-24 flex items-center justify-center overflow-hidden">
+    <main className="h-screen relative p-24 -mt-12 flex items-center justify-center overflow-hidden">
       <Image fill className="object-cover" src="/hero.webp" alt="" />
       <div className="absolute top-0 left-0 size-full bg-black/50 backdrop-blur-sm" />
 
@@ -14,7 +14,12 @@ export default function Home() {
         <Button asChild className="mx-auto p-8 text-lg gap-5">
           <Link href="/property-search"><SearchIcon /> Search Properties</Link>
         </Button>
+
       </div>
+
+      <p className="absolute bottom-4 w-full text-center text-sm opacity-80 text-white z-10">
+        <strong>Disclaimer:</strong> This demo site is for illustrative purposes only. All property listings shown here are fictional and do not represent actual properties or availability.
+      </p>
     </main>
   );
 }
