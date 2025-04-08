@@ -33,15 +33,16 @@ export default function FiltersForm() {
         const newSearchParams = new URLSearchParams();
 
         if (data.minPrice) {
-            newSearchParams.set("minPrice", data.minPrice);
+            newSearchParams.set("minPrice", data.minPrice || "0");
         }
         if (data.maxPrice) {
-            newSearchParams.set("maxPrice", data.maxPrice);
+            newSearchParams.set("maxPrice", data.maxPrice || "10000000000");
         }
         if (data.minBedrooms) {
-            newSearchParams.set("minBedrooms", data.minBedrooms);
+            newSearchParams.set("minBedrooms", data.minBedrooms || "0");
         }
         newSearchParams.set("page", "1");
+        console.log(`/property-search?${newSearchParams.toString()}`);
         router.push(`/property-search?${newSearchParams.toString()}`);
     };
 
