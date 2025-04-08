@@ -1,8 +1,12 @@
 # 🏡 Nestify – Full-Stack Real Estate Web App
 
-Nestify is a full-stack, production-ready real estate web application built with **Next.js** and **Firebase**. It allows users to explore and favorite listings, while giving admin users a seamless dashboard to manage properties — including dynamic forms, multi-image uploads, and rich markdown-based descriptions.
+**Nestify** is a full-stack, production-ready real estate web application built with **Next.js** and **Firebase**.
 
-Designed with a modern UI system, secure authentication, and a clear separation of client and server responsibilities, Nestify delivers a clean, scalable architecture and smooth user experience. It features robust role-based access control to ensure users and admins have the appropriate permissions across the app.
+It allows users to browse and favorite property listings, while admin users can seamlessly manage properties through a powerful dashboard — complete with dynamic forms, multi-image uploads, and markdown-based descriptions.
+
+Designed with a modern UI system, secure authentication, and clear separation of client and server responsibilities, Nestify delivers a clean, scalable architecture and a smooth user experience. It also includes **robust role-based access control**, ensuring appropriate permissions across all user roles.
+
+🌐 **Live Demo:** [https://nestifyhome.vercel.app/](https://nestifyhome.vercel.app/)
 
 ---
 
