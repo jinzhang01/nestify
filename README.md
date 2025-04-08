@@ -93,11 +93,6 @@ Designed with a modern UI system, secure authentication, and a clear separation 
 Created with 💻 by **Jin Zhang**  
 For questions, collaboration, or freelance inquiries, feel free to reach out on [LinkedIn](https://www.linkedin.com/in/jinzhang-hoyas/) or open an issue in the repo.
 
----
-
-📄 **License**
-
-This project is licensed under the [MIT License](LICENSE).
 
 ---
 
