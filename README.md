@@ -60,7 +60,7 @@ Designed with a modern UI system, secure authentication, and a clear separation 
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/your-username/nestify.git
+   git clone https://github.com/jinzhang01/nestify.git
    cd nestify
    ```
 
