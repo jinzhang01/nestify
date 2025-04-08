@@ -1,6 +1,3 @@
-//client side will responsible for the authentication etc
-
-// Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
 import { Auth, getAuth } from "firebase/auth";
 import { FirebaseStorage, getStorage } from "firebase/storage";
@@ -8,14 +5,14 @@ import { FirebaseStorage, getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+//  web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAzj6nGhzI00GvZeKEfsy9XNp_L8tUvZSM",
-    authDomain: "nestify-d913c.firebaseapp.com",
-    projectId: "nestify-d913c",
-    storageBucket: "nestify-d913c.firebasestorage.app",
-    messagingSenderId: "770676700262",
-    appId: "1:770676700262:web:c69f708acfafe6539269a7"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN!,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID!,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
 };
 
 // Initialize Firebase
@@ -34,8 +31,3 @@ if (!currentApps.length) {
 }
 
 export { auth, storage };
-// when use auth or storage, we can easily import from this file
-
-
-
-
